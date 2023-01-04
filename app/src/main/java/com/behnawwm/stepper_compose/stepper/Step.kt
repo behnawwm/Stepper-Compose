@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.behnawwm.stepper_compose.stepper.data.Constants.IconSize
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
+import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
 
 @Composable
@@ -39,7 +40,7 @@ fun Step(
             },
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        StepIcon(stepData.lineStatus)
+        StepIcon(stepData.progressStatus)
         Spacer(modifier = Modifier.width(16.dp))
         StepTitle(
             title = stepData.title,
@@ -73,20 +74,22 @@ private fun DrawScope.drawEndLine(lineStartX: Int) {
 @Preview
 @Composable
 fun StepView() {
-    Step(StepData("Step 1", LineStatus.Start))
+    Step(
+        StepData("Step 1", LineStatus.Start, ProgressStatus.Done)
+    )
 }
 
 @Preview
 @Composable
 fun StepView2() {
-    Step(StepData("Step 1", LineStatus.Middle))
+    Step(StepData("Step 1", LineStatus.Middle, ProgressStatus.InProgress))
 }
 
 
 @Preview
 @Composable
 fun StepView3() {
-    Step(StepData("Step 1", LineStatus.End))
+    Step(StepData("Step 1", LineStatus.End, ProgressStatus.Remaining))
 }
 
 

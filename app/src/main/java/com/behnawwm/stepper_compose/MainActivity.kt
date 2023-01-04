@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import com.behnawwm.stepper_compose.stepper.data.StepData
 import com.behnawwm.stepper_compose.stepper.Stepper
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
+import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.ui.theme.SteppercomposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,10 +26,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Stepper(
                         steps = listOf(
-                            StepData("Step 1", LineStatus.Start),
-                            StepData("Step 2", LineStatus.Middle),
-                            StepData("Step 3", LineStatus.Middle),
-                            StepData("Step 4", LineStatus.End),
+                            StepData("Step 1", LineStatus.Start, ProgressStatus.Done),
+                            StepData("Step 2", LineStatus.Middle, ProgressStatus.Done),
+                            StepData("Step 3", LineStatus.Middle, ProgressStatus.InProgress),
+                            StepData("Step 4", LineStatus.End, ProgressStatus.Remaining),
                         ),
                         modifier = Modifier.fillMaxSize()
                     )
