@@ -8,7 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.behnawwm.stepper.StepData
+import com.behnawwm.stepper_compose.stepper.data.LineStatus
+import com.behnawwm.stepper_compose.stepper.data.StepData
 
 @Composable
 fun Stepper(
@@ -25,7 +26,6 @@ fun Stepper(
                 stepData = steps[index],
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(80.dp)
             )
         }
     }
@@ -47,10 +47,10 @@ fun Test(modifier: Modifier = Modifier, stepData: StepData) {
 fun StepperPreview() {
     Stepper(
         listOf(
-            StepData("Step 1", 0),
-            StepData("Step 2", 0),
-            StepData("Step 3", 0),
-            StepData("Step 4", 1),
+            StepData("Step 1", LineStatus.Start),
+            StepData("Step 2", LineStatus.Middle),
+            StepData("Step 3", LineStatus.Middle),
+            StepData("Step 4", LineStatus.End),
         )
     )
 }

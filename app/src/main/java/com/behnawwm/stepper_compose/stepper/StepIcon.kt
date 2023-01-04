@@ -1,7 +1,6 @@
 package com.behnawwm.stepper_compose.stepper
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -11,12 +10,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.behnawwm.stepper_compose.stepper.data.Constants.IconSize
+import com.behnawwm.stepper_compose.stepper.data.LineStatus
 
 @Composable
-fun StepIcon(type: Int) {
-    when (type) {
-        0 -> StepIconActive()
-        1 -> StepIconInactive()
+fun StepIcon(lineStatus: LineStatus) {
+    when (lineStatus) {
+        LineStatus.End -> StepIconInactive()
+        LineStatus.Middle -> StepIconActive()
+        LineStatus.Start -> StepIconActive()
     }
 }
 
@@ -24,7 +26,7 @@ fun StepIcon(type: Int) {
 fun StepIconActive(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
-            .size(48.dp)
+            .size(IconSize.dp)
             .clip(CircleShape)
             .background(Color.Green)
     )
@@ -44,11 +46,5 @@ fun StepIconInactive(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun StepIconPreview() {
-    StepIcon(0)
-}
-
-@Preview
-@Composable
-fun StepIconPreview2() {
-    StepIcon(1)
+    StepIcon(LineStatus.Start)
 }
