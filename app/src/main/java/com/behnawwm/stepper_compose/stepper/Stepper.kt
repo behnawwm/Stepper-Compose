@@ -38,10 +38,34 @@ fun Stepper(
 fun StepperPreview() {
     Stepper(
         listOf(
-            StepData("Step 1", LineStatus.Start, ProgressStatus.Done),
-            StepData("Step 2", LineStatus.Middle, ProgressStatus.Done),
-            StepData("Step 3", LineStatus.Middle, ProgressStatus.InProgress),
-            StepData("Step 4", LineStatus.End, ProgressStatus.Remaining),
+            StepData(
+                title = "Step 1",
+                lineStatus = LineStatus.Start,
+                beforeProgressStatus = null,
+                progressStatus = ProgressStatus.Done,
+                nextProgressStatus = ProgressStatus.Done,
+            ),
+            StepData(
+                title = "Step 1",
+                lineStatus = LineStatus.Middle,
+                beforeProgressStatus = ProgressStatus.Done,
+                progressStatus = ProgressStatus.Done,
+                nextProgressStatus = ProgressStatus.InProgress,
+            ),
+            StepData(
+                title = "Step 1",
+                lineStatus = LineStatus.Middle,
+                beforeProgressStatus = ProgressStatus.InProgress,
+                progressStatus = ProgressStatus.InProgress,
+                nextProgressStatus = ProgressStatus.Remaining,
+            ),
+            StepData(
+                title = "Step 1",
+                lineStatus = LineStatus.End,
+                beforeProgressStatus = ProgressStatus.Remaining,
+                progressStatus = ProgressStatus.Done,
+                nextProgressStatus = null,
+            ),
         )
     )
 }

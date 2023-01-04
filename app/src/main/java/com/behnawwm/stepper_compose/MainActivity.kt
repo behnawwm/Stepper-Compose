@@ -24,15 +24,15 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(Color.White),
                 ) {
-                    Stepper(
-                        steps = listOf(
-                            StepData("Step 1", LineStatus.Start, ProgressStatus.Done),
-                            StepData("Step 2", LineStatus.Middle, ProgressStatus.Done),
-                            StepData("Step 3", LineStatus.Middle, ProgressStatus.InProgress),
-                            StepData("Step 4", LineStatus.End, ProgressStatus.Remaining),
-                        ),
-                        modifier = Modifier.fillMaxSize()
-                    )
+//                    Stepper(
+//                        steps = listOf(
+//                            StepData("Step 1", LineStatus.Start, ProgressStatus.Done),
+//                            StepData("Step 2", LineStatus.Middle, ProgressStatus.Done),
+//                            StepData("Step 3", LineStatus.Middle, ProgressStatus.InProgress),
+//                            StepData("Step 4", LineStatus.End, ProgressStatus.Remaining),
+//                        ),
+//                        modifier = Modifier.fillMaxSize()
+//                    )
                 }
             }
         }
