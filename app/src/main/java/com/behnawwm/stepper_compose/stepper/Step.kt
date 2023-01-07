@@ -8,16 +8,20 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.behnawwm.stepper_compose.stepper.data.Constants.IconSize
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
+import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineDefaults
 
 @Composable
 fun Step(
     stepData: StepData,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    lineProgressColors: ProgressLineColors,
 ) {
     Row(
         modifier = modifier
@@ -26,14 +30,26 @@ fun Step(
                 val lineStartX = (IconSize / 2)
                 when (stepData.lineStatus) {
                     LineStatus.End -> {
-                        drawTopToMiddle(lineStartX, stepData.beforeProgressStatus)
+                        drawTopToMiddle(
+                            lineStartX,
+                            lineProgressColors.progressColor(stepData.beforeProgressStatus)
+                        )
                     }
                     LineStatus.Middle -> {
-                        drawTopToMiddle(lineStartX, stepData.beforeProgressStatus)
-                        drawMiddleToBottom(lineStartX, stepData.nextProgressStatus)
+                        drawTopToMiddle(
+                            lineStartX,
+                            lineProgressColors.progressColor(stepData.beforeProgressStatus)
+                        )
+                        drawMiddleToBottom(
+                            lineStartX,
+                            lineProgressColors.progressColor(stepData.nextProgressStatus)
+                        )
                     }
                     LineStatus.Start -> {
-                        drawMiddleToBottom(lineStartX, stepData.nextProgressStatus)
+                        drawMiddleToBottom(
+                            lineStartX,
+                            lineProgressColors.progressColor(stepData.nextProgressStatus)
+                        )
                     }
                 }
             },
@@ -51,16 +67,10 @@ fun Step(
 }
 
 
-private fun DrawScope.drawMiddleToBottom(lineStartX: Int, nextProgressStatus: ProgressStatus?) {
-    when (nextProgressStatus) {
-        ProgressStatus.Done -> drawMiddleToBottom(lineStartX, Color.Green)
-        ProgressStatus.InProgress -> drawMiddleToBottom(lineStartX, Color.Blue)
-        ProgressStatus.Remaining -> drawMiddleToBottom(lineStartX, Color.Gray)
-        null -> {}
-    }
-}
-
-private fun DrawScope.drawMiddleToBottom(lineStartX: Int, color: Color) {
+private fun DrawScope.drawMiddleToBottom(
+    lineStartX: Int,
+    color: Color
+) {
     drawLine(
         color = color,
         start = Offset(lineStartX.dp.toPx(), size.height / 2),
@@ -69,16 +79,11 @@ private fun DrawScope.drawMiddleToBottom(lineStartX: Int, color: Color) {
     )
 }
 
-private fun DrawScope.drawTopToMiddle(lineStartX: Int, beforeProgressStatus: ProgressStatus?) {
-    when (beforeProgressStatus) {
-        ProgressStatus.Done -> drawTopToMiddle(lineStartX, Color.Green)
-        ProgressStatus.InProgress -> drawTopToMiddle(lineStartX, Color.Blue)
-        ProgressStatus.Remaining -> drawTopToMiddle(lineStartX, Color.Gray)
-        null -> {}
-    }
-}
 
-private fun DrawScope.drawTopToMiddle(lineStartX: Int, color: Color) {
+private fun DrawScope.drawTopToMiddle(
+    lineStartX: Int,
+    color: Color
+) {
     drawLine(
         color = color,
         start = Offset(lineStartX.dp.toPx(), 0f),
@@ -88,25 +93,50 @@ private fun DrawScope.drawTopToMiddle(lineStartX: Int, color: Color) {
 }
 
 
-//@Preview
-//@Composable
-//fun StepView() {
-//    Step(
-//        StepData("Step 1", LineStatus.Start, ProgressStatus.Done,)
-//    )
-//}
-//
-//@Preview
-//@Composable
-//fun StepView2() {
-//    Step(StepData("Step 1", LineStatus.Middle, ProgressStatus.InProgress))
-//}
-//
-//
-//@Preview
-//@Composable
-//fun StepView3() {
-//    Step(StepData("Step 1", LineStatus.End, ProgressStatus.Remaining))
-//}
-//
-//
+@Preview
+@Composable
+fun StepView() {
+    Step(
+        StepData(
+            title = "Step 1",
+            lineStatus = LineStatus.Start,
+            beforeProgressStatus = null,
+            progressStatus = ProgressStatus.Done,
+            nextProgressStatus = ProgressStatus.Done,
+        ),
+        lineProgressColors = ProgressLineDefaults.progressLineColors()
+    )
+}
+
+@Preview
+@Composable
+fun StepView2() {
+    Step(
+        StepData(
+            title = "Step 1",
+            lineStatus = LineStatus.Middle,
+            beforeProgressStatus = ProgressStatus.InProgress,
+            progressStatus = ProgressStatus.InProgress,
+            nextProgressStatus = ProgressStatus.Remaining,
+        ),
+        lineProgressColors = ProgressLineDefaults.progressLineColors()
+    )
+}
+
+
+@Preview
+@Composable
+fun StepView3() {
+    Step(
+        StepData(
+            title = "Step 1",
+            lineStatus = LineStatus.End,
+            beforeProgressStatus = ProgressStatus.Remaining,
+            progressStatus = ProgressStatus.Remaining,
+            nextProgressStatus = null,
+        ),
+        lineProgressColors = ProgressLineDefaults.progressLineColors()
+    )
+}
+
+

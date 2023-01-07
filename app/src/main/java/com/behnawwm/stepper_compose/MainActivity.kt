@@ -8,10 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.behnawwm.stepper_compose.stepper.data.StepData
-import com.behnawwm.stepper_compose.stepper.Stepper
-import com.behnawwm.stepper_compose.stepper.data.LineStatus
-import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.ui.theme.SteppercomposeTheme
 
 class MainActivity : ComponentActivity() {
