@@ -6,6 +6,4 @@ import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 interface ProgressLineColors {
 
     fun progressColor(progressStatus: ProgressStatus?): Color //todo migrate to state?
-
-    fun progressConfiguration(enabled: Boolean): Color //todo migrate to state?
 }

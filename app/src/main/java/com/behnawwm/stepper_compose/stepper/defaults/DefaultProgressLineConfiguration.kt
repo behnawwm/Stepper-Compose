@@ -6,10 +6,15 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 
 data class DefaultProgressLineConfiguration(
-    val lineWidth: Float,
+    val strokeWidth: Float,
     val pathEffect: PathEffect?,
     val cap: StrokeCap,
     val alpha: Float,
     val colorFilter: ColorFilter?,
     val blendMode: BlendMode
-) : ProgressLineConfiguration
+) : ProgressLineConfiguration {
+
+    override fun progressLineConfiguration(): DefaultProgressLineConfiguration {
+        return ProgressLineDefaults.progressLineConfiguration().progressLineConfiguration()
+    }
+}

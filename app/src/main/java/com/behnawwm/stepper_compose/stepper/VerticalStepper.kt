@@ -32,7 +32,8 @@ fun VerticalStepper(
                 stepData = steps[index],
                 modifier = Modifier
                     .fillMaxWidth(),
-                lineProgressColors = lineProgressColors,
+                progressLineColors = lineProgressColors,
+                progressLineConfiguration = lineProgressConfiguration
             )
         }
     }

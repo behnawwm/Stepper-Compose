@@ -1,12 +1,10 @@
 package com.behnawwm.stepper_compose.stepper.defaults
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.DrawScope
 
 object ProgressLineDefaults {
 
-    @Composable
     fun progressLineColors(
         doneColor: Color = Color.Green,
         inProgressColor: Color = Color.Blue,
@@ -17,7 +15,6 @@ object ProgressLineDefaults {
         remainingColor = remainingColor,
     )
 
-    @Composable
     fun progressLineConfiguration(
         lineWidth: Float = 2f,
         pathEffect: PathEffect? = null,
@@ -26,7 +23,7 @@ object ProgressLineDefaults {
         colorFilter: ColorFilter? = null,
         blendMode: BlendMode = DrawScope.DefaultBlendMode
     ): ProgressLineConfiguration = DefaultProgressLineConfiguration(
-        lineWidth = lineWidth,
+        strokeWidth = lineWidth,
         pathEffect = pathEffect,
         cap = cap,
         alpha = alpha,

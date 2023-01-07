@@ -15,13 +15,15 @@ import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
 import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineConfiguration
 import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineDefaults
 
 @Composable
 fun Step(
     stepData: StepData,
     modifier: Modifier = Modifier,
-    lineProgressColors: ProgressLineColors,
+    progressLineColors: ProgressLineColors,
+    progressLineConfiguration: ProgressLineConfiguration
 ) {
     Row(
         modifier = modifier
@@ -32,23 +34,27 @@ fun Step(
                     LineStatus.End -> {
                         drawTopToMiddle(
                             lineStartX,
-                            lineProgressColors.progressColor(stepData.beforeProgressStatus)
+                            progressLineColors.progressColor(stepData.beforeProgressStatus),
+                            progressLineConfiguration
                         )
                     }
                     LineStatus.Middle -> {
                         drawTopToMiddle(
                             lineStartX,
-                            lineProgressColors.progressColor(stepData.beforeProgressStatus)
+                            progressLineColors.progressColor(stepData.beforeProgressStatus),
+                            progressLineConfiguration
                         )
                         drawMiddleToBottom(
                             lineStartX,
-                            lineProgressColors.progressColor(stepData.nextProgressStatus)
+                            progressLineColors.progressColor(stepData.nextProgressStatus),
+                            progressLineConfiguration
                         )
                     }
                     LineStatus.Start -> {
                         drawMiddleToBottom(
                             lineStartX,
-                            lineProgressColors.progressColor(stepData.nextProgressStatus)
+                            progressLineColors.progressColor(stepData.nextProgressStatus),
+                            progressLineConfiguration
                         )
                     }
                 }
@@ -69,20 +75,27 @@ fun Step(
 
 private fun DrawScope.drawMiddleToBottom(
     lineStartX: Int,
-    color: Color
+    color: Color,
+    progressLineConfiguration: ProgressLineConfiguration
 ) {
     drawLine(
         color = color,
         start = Offset(lineStartX.dp.toPx(), size.height / 2),
         end = Offset(lineStartX.dp.toPx(), size.height),
-        strokeWidth = 2.dp.toPx()
+        strokeWidth = progressLineConfiguration.progressLineConfiguration().strokeWidth,
+        cap = progressLineConfiguration.progressLineConfiguration().cap,
+        pathEffect = progressLineConfiguration.progressLineConfiguration().pathEffect,
+        colorFilter = progressLineConfiguration.progressLineConfiguration().colorFilter,
+        blendMode = progressLineConfiguration.progressLineConfiguration().blendMode,
+        alpha = progressLineConfiguration.progressLineConfiguration().alpha,
     )
 }
 
 
 private fun DrawScope.drawTopToMiddle(
     lineStartX: Int,
-    color: Color
+    color: Color,
+    progressLineConfiguration: ProgressLineConfiguration
 ) {
     drawLine(
         color = color,
@@ -104,7 +117,8 @@ fun StepView() {
             progressStatus = ProgressStatus.Done,
             nextProgressStatus = ProgressStatus.Done,
         ),
-        lineProgressColors = ProgressLineDefaults.progressLineColors()
+        progressLineColors = ProgressLineDefaults.progressLineColors(),
+        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration()
     )
 }
 
@@ -119,7 +133,8 @@ fun StepView2() {
             progressStatus = ProgressStatus.InProgress,
             nextProgressStatus = ProgressStatus.Remaining,
         ),
-        lineProgressColors = ProgressLineDefaults.progressLineColors()
+        progressLineColors = ProgressLineDefaults.progressLineColors(),
+        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration()
     )
 }
 
@@ -135,7 +150,8 @@ fun StepView3() {
             progressStatus = ProgressStatus.Remaining,
             nextProgressStatus = null,
         ),
-        lineProgressColors = ProgressLineDefaults.progressLineColors()
+        progressLineColors = ProgressLineDefaults.progressLineColors(),
+        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration()
     )
 }
 

@@ -18,8 +18,4 @@ data class DefaultProgressLineColors(
         }
         //todo use rememberUpdatedState
     }
-
-    override fun progressConfiguration(enabled: Boolean): Color {
-        TODO("Not yet implemented")
-    }
 }
