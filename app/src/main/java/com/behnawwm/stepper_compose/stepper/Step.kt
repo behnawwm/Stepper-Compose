@@ -16,6 +16,7 @@ import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.
 import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.StepIndicatorDefaults
 import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.StepIndicatorColors
 import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.icon.IconStepIndicatorConfiguration
 
 @Composable
 fun Step(
@@ -24,6 +25,7 @@ fun Step(
     progressLineConfiguration: ProgressLineConfiguration,
     stepIndicatorConfiguration: StepIndicatorConfiguration,
     stepIndicatorColors: StepIndicatorColors,
+    iconStepIndicatorConfiguration: IconStepIndicatorConfiguration,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -39,7 +41,12 @@ fun Step(
             },
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        StepIndicator(stepData, stepIndicatorColors, stepIndicatorConfiguration)
+        IconStepIndicator(
+            stepData,
+            stepIndicatorColors,
+            stepIndicatorConfiguration,
+            iconStepIndicatorConfiguration
+        )
         Spacer(modifier = Modifier.width(16.dp))
         StepTitle(
             title = stepData.title,
@@ -49,7 +56,6 @@ fun Step(
         )
     }
 }
-
 
 
 @Preview
@@ -67,6 +73,7 @@ fun StepView() {
         progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
         stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
         stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
+        iconStepIndicatorConfiguration = StepIndicatorDefaults.iconStepIndicatorConfiguration(),
     )
 }
 
@@ -85,6 +92,7 @@ fun StepView2() {
         progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
         stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
         stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
+        iconStepIndicatorConfiguration = StepIndicatorDefaults.iconStepIndicatorConfiguration(),
     )
 }
 
@@ -104,6 +112,7 @@ fun StepView3() {
         progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
         stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
         stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
+        iconStepIndicatorConfiguration = StepIndicatorDefaults.iconStepIndicatorConfiguration(),
     )
 }
 

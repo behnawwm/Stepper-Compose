@@ -17,6 +17,7 @@ import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.
 import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.StepIndicatorDefaults
 import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.StepIndicatorColors
 import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.icon.IconStepIndicatorConfiguration
 
 @Composable
 fun VerticalStepper(
@@ -26,6 +27,7 @@ fun VerticalStepper(
     lineProgressConfiguration: ProgressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
     stepIndicatorConfiguration: StepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
     stepIndicatorColors: StepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
+    iconStepIndicatorConfiguration: IconStepIndicatorConfiguration = StepIndicatorDefaults.iconStepIndicatorConfiguration(),
 ) {
     LazyColumn(
         modifier = modifier
@@ -41,6 +43,7 @@ fun VerticalStepper(
                 progressLineConfiguration = lineProgressConfiguration,
                 stepIndicatorConfiguration = stepIndicatorConfiguration,
                 stepIndicatorColors = stepIndicatorColors,
+                iconStepIndicatorConfiguration = iconStepIndicatorConfiguration,
             )
         }
     }

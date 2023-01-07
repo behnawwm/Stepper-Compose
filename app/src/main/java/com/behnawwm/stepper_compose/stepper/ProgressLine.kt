@@ -16,7 +16,7 @@ fun DrawScope.drawProgressLine(
     progressLineConfiguration: ProgressLineConfiguration,
     stepIndicatorConfiguration: StepIndicatorConfiguration
 ) {
-    val lineStartX = (stepIndicatorConfiguration.size() / 2)
+    val lineStartX = (stepIndicatorConfiguration.size(stepData.progressStatus) / 2)
     when (stepData.lineStatus) {
         LineStatus.End -> {
             drawTopToMiddle(
