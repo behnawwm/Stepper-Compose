@@ -1,7 +1,11 @@
-package com.behnawwm.stepper_compose.stepper.defaults
+package com.behnawwm.stepper_compose.stepper.defaults.progressLine
 
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.DefaultProgressLineColors
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.DefaultProgressLineConfiguration
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.ProgressLineConfiguration
 
 object ProgressLineDefaults {
 
@@ -16,14 +20,14 @@ object ProgressLineDefaults {
     )
 
     fun progressLineConfiguration(
-        lineWidth: Float = 2f,
+        strokeWidth: Float = 2f,
         pathEffect: PathEffect? = null,
         cap: StrokeCap = StrokeCap.Butt,
         alpha: Float = 1.0f,
         colorFilter: ColorFilter? = null,
         blendMode: BlendMode = DrawScope.DefaultBlendMode
     ): ProgressLineConfiguration = DefaultProgressLineConfiguration(
-        strokeWidth = lineWidth,
+        strokeWidth = strokeWidth,
         pathEffect = pathEffect,
         cap = cap,
         alpha = alpha,

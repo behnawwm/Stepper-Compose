@@ -5,63 +5,41 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.behnawwm.stepper_compose.stepper.data.Constants.IconSize
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
-import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineColors
-import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineDefaults
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.ProgressLineDefaults
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.ProgressLineConfiguration
+import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.StepIndicatorDefaults
+import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.StepIndicatorColors
+import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
 
 @Composable
 fun Step(
     stepData: StepData,
-    modifier: Modifier = Modifier,
     progressLineColors: ProgressLineColors,
-    progressLineConfiguration: ProgressLineConfiguration
+    progressLineConfiguration: ProgressLineConfiguration,
+    stepIndicatorConfiguration: StepIndicatorConfiguration,
+    stepIndicatorColors: StepIndicatorColors,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .drawBehind {
-                val lineStartX = (IconSize / 2)
-                when (stepData.lineStatus) {
-                    LineStatus.End -> {
-                        drawTopToMiddle(
-                            lineStartX,
-                            progressLineColors.progressColor(stepData.beforeProgressStatus),
-                            progressLineConfiguration
-                        )
-                    }
-                    LineStatus.Middle -> {
-                        drawTopToMiddle(
-                            lineStartX,
-                            progressLineColors.progressColor(stepData.beforeProgressStatus),
-                            progressLineConfiguration
-                        )
-                        drawMiddleToBottom(
-                            lineStartX,
-                            progressLineColors.progressColor(stepData.nextProgressStatus),
-                            progressLineConfiguration
-                        )
-                    }
-                    LineStatus.Start -> {
-                        drawMiddleToBottom(
-                            lineStartX,
-                            progressLineColors.progressColor(stepData.nextProgressStatus),
-                            progressLineConfiguration
-                        )
-                    }
-                }
+                drawProgressLine(
+                    stepData,
+                    progressLineColors,
+                    progressLineConfiguration,
+                    stepIndicatorConfiguration
+                )
             },
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        StepIcon(stepData.progressStatus)
+        StepIndicator(stepData, stepIndicatorColors, stepIndicatorConfiguration)
         Spacer(modifier = Modifier.width(16.dp))
         StepTitle(
             title = stepData.title,
@@ -72,38 +50,6 @@ fun Step(
     }
 }
 
-
-private fun DrawScope.drawMiddleToBottom(
-    lineStartX: Int,
-    color: Color,
-    progressLineConfiguration: ProgressLineConfiguration
-) {
-    drawLine(
-        color = color,
-        start = Offset(lineStartX.dp.toPx(), size.height / 2),
-        end = Offset(lineStartX.dp.toPx(), size.height),
-        strokeWidth = progressLineConfiguration.progressLineConfiguration().strokeWidth,
-        cap = progressLineConfiguration.progressLineConfiguration().cap,
-        pathEffect = progressLineConfiguration.progressLineConfiguration().pathEffect,
-        colorFilter = progressLineConfiguration.progressLineConfiguration().colorFilter,
-        blendMode = progressLineConfiguration.progressLineConfiguration().blendMode,
-        alpha = progressLineConfiguration.progressLineConfiguration().alpha,
-    )
-}
-
-
-private fun DrawScope.drawTopToMiddle(
-    lineStartX: Int,
-    color: Color,
-    progressLineConfiguration: ProgressLineConfiguration
-) {
-    drawLine(
-        color = color,
-        start = Offset(lineStartX.dp.toPx(), 0f),
-        end = Offset(lineStartX.dp.toPx(), size.height / 2),
-        strokeWidth = 2.dp.toPx()
-    )
-}
 
 
 @Preview
@@ -118,7 +64,9 @@ fun StepView() {
             nextProgressStatus = ProgressStatus.Done,
         ),
         progressLineColors = ProgressLineDefaults.progressLineColors(),
-        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration()
+        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
+        stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
+        stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
     )
 }
 
@@ -134,7 +82,9 @@ fun StepView2() {
             nextProgressStatus = ProgressStatus.Remaining,
         ),
         progressLineColors = ProgressLineDefaults.progressLineColors(),
-        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration()
+        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
+        stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
+        stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
     )
 }
 
@@ -151,7 +101,9 @@ fun StepView3() {
             nextProgressStatus = null,
         ),
         progressLineColors = ProgressLineDefaults.progressLineColors(),
-        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration()
+        progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
+        stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
+        stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
     )
 }
 

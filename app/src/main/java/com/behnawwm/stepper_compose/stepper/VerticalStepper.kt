@@ -11,16 +11,21 @@ import androidx.compose.ui.unit.dp
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
-import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineColors
-import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.ProgressLineDefaults
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.ProgressLineDefaults
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.ProgressLineConfiguration
+import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.StepIndicatorDefaults
+import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.StepIndicatorColors
+import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
 
 @Composable
 fun VerticalStepper(
     steps: List<StepData>,
     modifier: Modifier = Modifier,
     lineProgressColors: ProgressLineColors = ProgressLineDefaults.progressLineColors(),
-    lineProgressConfiguration: ProgressLineConfiguration = ProgressLineDefaults.progressLineConfiguration()
+    lineProgressConfiguration: ProgressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
+    stepIndicatorConfiguration: StepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
+    stepIndicatorColors: StepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
 ) {
     LazyColumn(
         modifier = modifier
@@ -33,7 +38,9 @@ fun VerticalStepper(
                 modifier = Modifier
                     .fillMaxWidth(),
                 progressLineColors = lineProgressColors,
-                progressLineConfiguration = lineProgressConfiguration
+                progressLineConfiguration = lineProgressConfiguration,
+                stepIndicatorConfiguration = stepIndicatorConfiguration,
+                stepIndicatorColors = stepIndicatorColors,
             )
         }
     }
