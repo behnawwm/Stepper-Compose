@@ -4,8 +4,11 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.unit.Dp
 
 interface ProgressLineConfiguration {   //todo migrate values to value states
+
+    fun distanceFromIndicator(): Dp
 
     fun strokeWidth(): Float
 

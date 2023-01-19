@@ -3,7 +3,6 @@ package com.behnawwm.stepper_compose.stepper
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.unit.Dp
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
 import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.ProgressLineColors
@@ -16,32 +15,46 @@ fun DrawScope.drawProgressLine(
     progressLineConfiguration: ProgressLineConfiguration,
     stepIndicatorConfiguration: StepIndicatorConfiguration
 ) {
-    val lineStartX = (stepIndicatorConfiguration.size(stepData.progressStatus) / 2)
+    val indicatorSize = stepIndicatorConfiguration.size(stepData.progressStatus).toPx()
+
+    val lineStartX = (indicatorSize / 2)
+
+    val lineEndYBeforeIndicator =
+        (size.height / 2) - (indicatorSize / 2) - progressLineConfiguration.distanceFromIndicator()
+            .toPx()
+    val lineStartYAfterIndicator =
+        (size.height / 2) + (indicatorSize / 2) + progressLineConfiguration.distanceFromIndicator()
+            .toPx()
+
     when (stepData.lineStatus) {
         LineStatus.End -> {
             drawTopToMiddle(
                 lineStartX,
+                lineEndYBeforeIndicator,
+                progressLineConfiguration,
                 progressLineColors.progressColor(stepData.beforeProgressStatus),
-                progressLineConfiguration
             )
         }
         LineStatus.Middle -> {
             drawTopToMiddle(
                 lineStartX,
+                lineEndYBeforeIndicator,
+                progressLineConfiguration,
                 progressLineColors.progressColor(stepData.beforeProgressStatus),
-                progressLineConfiguration
             )
             drawMiddleToBottom(
                 lineStartX,
+                lineStartYAfterIndicator,
                 progressLineColors.progressColor(stepData.nextProgressStatus),
-                progressLineConfiguration
+                progressLineConfiguration,
             )
         }
         LineStatus.Start -> {
             drawMiddleToBottom(
                 lineStartX,
+                lineStartYAfterIndicator,
                 progressLineColors.progressColor(stepData.nextProgressStatus),
-                progressLineConfiguration
+                progressLineConfiguration,
             )
         }
     }
@@ -49,14 +62,15 @@ fun DrawScope.drawProgressLine(
 
 
 fun DrawScope.drawMiddleToBottom(
-    lineStartX: Dp,
+    lineStartX: Float,
+    lineStartAfterIndicator: Float,
     color: Color,
-    progressLineConfiguration: ProgressLineConfiguration
+    progressLineConfiguration: ProgressLineConfiguration,
 ) {
     drawLine(
         color = color,
-        start = Offset(lineStartX.toPx(), size.height / 2),
-        end = Offset(lineStartX.toPx(), size.height),
+        start = Offset(lineStartX, lineStartAfterIndicator),
+        end = Offset(lineStartX, size.height),
         strokeWidth = progressLineConfiguration.strokeWidth(),
         cap = progressLineConfiguration.cap(),
         pathEffect = progressLineConfiguration.pathEffect(),
@@ -68,14 +82,20 @@ fun DrawScope.drawMiddleToBottom(
 
 
 fun DrawScope.drawTopToMiddle(
-    lineStartX: Dp,
+    lineStartX: Float,
+    lineEndBeforeIndicator: Float,
+    progressLineConfiguration: ProgressLineConfiguration,
     color: Color,
-    progressLineConfiguration: ProgressLineConfiguration
 ) {
     drawLine(
         color = color,
-        start = Offset(lineStartX.toPx(), 0f),
-        end = Offset(lineStartX.toPx(), size.height / 2),
-        strokeWidth = progressLineConfiguration.strokeWidth()
+        start = Offset(lineStartX, 0f),
+        end = Offset(lineStartX, lineEndBeforeIndicator),
+        strokeWidth = progressLineConfiguration.strokeWidth(),
+        cap = progressLineConfiguration.cap(),
+        pathEffect = progressLineConfiguration.pathEffect(),
+        colorFilter = progressLineConfiguration.colorFilter(),
+        blendMode = progressLineConfiguration.blendMode(),
+        alpha = progressLineConfiguration.alpha(),
     )
 }
