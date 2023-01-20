@@ -1,4 +1,4 @@
-package com.behnawwm.stepper_compose.stepper.defaults.progressLine.color
+package com.behnawwm.stepper_compose.stepper.config.progressLine.color
 
 import androidx.compose.ui.graphics.Color
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus

@@ -1,4 +1,4 @@
-package com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.icon
+package com.behnawwm.stepper_compose.stepper.config.stepIndicator.icon
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter

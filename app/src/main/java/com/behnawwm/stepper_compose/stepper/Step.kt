@@ -1,22 +1,24 @@
 package com.behnawwm.stepper_compose.stepper
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.behnawwm.stepper_compose.stepper.config.progressLine.ProgressLineDefaults
+import com.behnawwm.stepper_compose.stepper.config.progressLine.color.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.config.progressLine.configuration.ProgressLineConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepContent.StepContentDefaults
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.StepIndicatorDefaults
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.color.StepIndicatorColors
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.configuration.StepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.icon.IconStepIndicatorConfiguration
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.ProgressLineDefaults
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.ProgressLineColors
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.ProgressLineConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.StepIndicatorDefaults
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.StepIndicatorColors
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.icon.IconStepIndicatorConfiguration
 
 @Composable
 fun Step(
@@ -27,6 +29,7 @@ fun Step(
     stepIndicatorColors: StepIndicatorColors,
     iconStepIndicatorConfiguration: IconStepIndicatorConfiguration,
     modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -47,13 +50,12 @@ fun Step(
             stepIndicatorConfiguration,
             iconStepIndicatorConfiguration
         )
-        Spacer(modifier = Modifier.width(16.dp))
-        StepTitle(
-            title = stepData.title,
+        Box(
             modifier = Modifier
                 .weight(1f)
-                .height(100.dp)
-        )
+        ) {
+            content()
+        }
     }
 }
 
@@ -61,38 +63,42 @@ fun Step(
 @Preview
 @Composable
 fun StepView() {
+    val stepData = StepData(
+        title = "Step 1",
+        lineStatus = LineStatus.Start,
+        beforeProgressStatus = null,
+        progressStatus = ProgressStatus.Done,
+        nextProgressStatus = ProgressStatus.Done,
+    )
     Step(
-        StepData(
-            title = "Step 1",
-            lineStatus = LineStatus.Start,
-            beforeProgressStatus = null,
-            progressStatus = ProgressStatus.Done,
-            nextProgressStatus = ProgressStatus.Done,
-        ),
+        stepData = stepData,
         progressLineColors = ProgressLineDefaults.progressLineColors(),
         progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
         stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
         stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
         iconStepIndicatorConfiguration = StepIndicatorDefaults.iconStepIndicatorConfiguration(),
+        content = { StepContentDefaults.content() }
     )
 }
 
 @Preview
 @Composable
 fun StepView2() {
+    val stepData = StepData(
+        title = "Step 1",
+        lineStatus = LineStatus.Middle,
+        beforeProgressStatus = ProgressStatus.InProgress,
+        progressStatus = ProgressStatus.InProgress,
+        nextProgressStatus = ProgressStatus.Remaining,
+    )
     Step(
-        StepData(
-            title = "Step 1",
-            lineStatus = LineStatus.Middle,
-            beforeProgressStatus = ProgressStatus.InProgress,
-            progressStatus = ProgressStatus.InProgress,
-            nextProgressStatus = ProgressStatus.Remaining,
-        ),
+        stepData = stepData,
         progressLineColors = ProgressLineDefaults.progressLineColors(),
         progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
         stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
         stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
         iconStepIndicatorConfiguration = StepIndicatorDefaults.iconStepIndicatorConfiguration(),
+        content = { StepContentDefaults.content() }
     )
 }
 
@@ -100,19 +106,21 @@ fun StepView2() {
 @Preview
 @Composable
 fun StepView3() {
+    val stepData = StepData(
+        title = "Step 1",
+        lineStatus = LineStatus.End,
+        beforeProgressStatus = ProgressStatus.Remaining,
+        progressStatus = ProgressStatus.Remaining,
+        nextProgressStatus = null,
+    )
     Step(
-        StepData(
-            title = "Step 1",
-            lineStatus = LineStatus.End,
-            beforeProgressStatus = ProgressStatus.Remaining,
-            progressStatus = ProgressStatus.Remaining,
-            nextProgressStatus = null,
-        ),
+        stepData = stepData,
         progressLineColors = ProgressLineDefaults.progressLineColors(),
         progressLineConfiguration = ProgressLineDefaults.progressLineConfiguration(),
         stepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
         stepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
         iconStepIndicatorConfiguration = StepIndicatorDefaults.iconStepIndicatorConfiguration(),
+        content = { StepContentDefaults.content() }
     )
 }
 

@@ -2,23 +2,23 @@ package com.behnawwm.stepper_compose.stepper
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.behnawwm.stepper_compose.stepper.config.progressLine.ProgressLineDefaults
+import com.behnawwm.stepper_compose.stepper.config.progressLine.color.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.config.progressLine.configuration.ProgressLineConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepContent.StepContentConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepContent.StepContentDefaults
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.StepIndicatorDefaults
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.color.StepIndicatorColors
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.configuration.StepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.icon.IconStepIndicatorConfiguration
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.ProgressLineDefaults
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.ProgressLineColors
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.ProgressLineConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.StepIndicatorDefaults
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.StepIndicatorColors
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.icon.IconStepIndicatorConfiguration
 
 @Composable
 fun VerticalStepper(
@@ -29,27 +29,25 @@ fun VerticalStepper(
     stepIndicatorConfiguration: StepIndicatorConfiguration = StepIndicatorDefaults.indicatorConfiguration(),
     stepIndicatorColors: StepIndicatorColors = StepIndicatorDefaults.indicatorColors(),
     iconStepIndicatorConfiguration: IconStepIndicatorConfiguration = StepIndicatorDefaults.iconStepIndicatorConfiguration(),
+    stepContentConfiguration: StepContentConfiguration = StepContentDefaults.content()
 ) {
     LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp)
+        modifier = modifier.fillMaxSize(),
     ) {
-        items(steps) { step ->
+        items(steps) { stepData ->
             Step(
-                stepData = step,
-                modifier = Modifier
-                    .fillMaxWidth(),
+                stepData = stepData,
+                modifier = Modifier.fillMaxWidth(),
                 progressLineColors = lineProgressColors,
                 progressLineConfiguration = lineProgressConfiguration,
                 stepIndicatorConfiguration = stepIndicatorConfiguration,
                 stepIndicatorColors = stepIndicatorColors,
                 iconStepIndicatorConfiguration = iconStepIndicatorConfiguration,
+                content = stepContentConfiguration.content(stepData = stepData, modifier = Modifier)
             )
         }
     }
 }
-
 
 @Preview
 @Composable

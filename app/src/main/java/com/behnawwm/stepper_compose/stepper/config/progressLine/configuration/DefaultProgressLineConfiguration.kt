@@ -1,4 +1,4 @@
-package com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration
+package com.behnawwm.stepper_compose.stepper.config.progressLine.configuration
 
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter

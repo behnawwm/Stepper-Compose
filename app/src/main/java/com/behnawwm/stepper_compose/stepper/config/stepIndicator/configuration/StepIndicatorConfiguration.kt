@@ -1,4 +1,4 @@
-package com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration
+package com.behnawwm.stepper_compose.stepper.config.stepIndicator.configuration
 
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp

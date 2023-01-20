@@ -1,4 +1,4 @@
-package com.behnawwm.stepper_compose.stepper.defaults.progressLine
+package com.behnawwm.stepper_compose.stepper.config.progressLine
 
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
@@ -8,10 +8,10 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.DefaultProgressLineColors
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.ProgressLineColors
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.DefaultProgressLineConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.ProgressLineConfiguration
+import com.behnawwm.stepper_compose.stepper.config.progressLine.color.DefaultProgressLineColors
+import com.behnawwm.stepper_compose.stepper.config.progressLine.color.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.config.progressLine.configuration.DefaultProgressLineConfiguration
+import com.behnawwm.stepper_compose.stepper.config.progressLine.configuration.ProgressLineConfiguration
 
 object ProgressLineDefaults {
 

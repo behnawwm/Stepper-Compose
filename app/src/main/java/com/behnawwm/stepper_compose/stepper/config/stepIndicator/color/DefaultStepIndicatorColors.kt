@@ -1,4 +1,4 @@
-package com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color
+package com.behnawwm.stepper_compose.stepper.config.stepIndicator.color
 
 import androidx.compose.ui.graphics.Color
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus

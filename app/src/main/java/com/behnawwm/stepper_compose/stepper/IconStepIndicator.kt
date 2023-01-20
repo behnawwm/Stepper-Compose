@@ -9,13 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.StepIndicatorDefaults
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.color.StepIndicatorColors
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.configuration.StepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.icon.IconStepIndicatorConfiguration
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.StepIndicatorDefaults
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.StepIndicatorColors
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.icon.IconStepIndicatorConfiguration
 
 @Composable
 fun IconStepIndicator(

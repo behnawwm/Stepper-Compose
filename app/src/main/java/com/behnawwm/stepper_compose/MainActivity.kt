@@ -12,10 +12,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.tooling.preview.Preview
 import com.behnawwm.stepper_compose.stepper.VerticalStepper
+import com.behnawwm.stepper_compose.stepper.config.progressLine.ProgressLineDefaults
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.ProgressStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.ProgressLineDefaults
 import com.behnawwm.stepper_compose.ui.theme.SteppercomposeTheme
 
 class MainActivity : ComponentActivity() {

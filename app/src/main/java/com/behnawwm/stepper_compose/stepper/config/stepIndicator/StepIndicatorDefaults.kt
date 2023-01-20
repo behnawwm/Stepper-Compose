@@ -1,4 +1,4 @@
-package com.behnawwm.stepper_compose.stepper.defaults.stepIndicator
+package com.behnawwm.stepper_compose.stepper.config.stepIndicator
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -12,12 +12,12 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.DefaultStepIndicatorColors
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.color.StepIndicatorColors
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.DefaultStepIndicatorConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.icon.DefaultIconStepIndicatorConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.icon.IconStepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.color.DefaultStepIndicatorColors
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.color.StepIndicatorColors
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.configuration.DefaultStepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.configuration.StepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.icon.DefaultIconStepIndicatorConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.icon.IconStepIndicatorConfiguration
 
 object StepIndicatorDefaults {
 

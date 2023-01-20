@@ -3,11 +3,11 @@ package com.behnawwm.stepper_compose.stepper
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import com.behnawwm.stepper_compose.stepper.config.progressLine.color.ProgressLineColors
+import com.behnawwm.stepper_compose.stepper.config.progressLine.configuration.ProgressLineConfiguration
+import com.behnawwm.stepper_compose.stepper.config.stepIndicator.configuration.StepIndicatorConfiguration
 import com.behnawwm.stepper_compose.stepper.data.LineStatus
 import com.behnawwm.stepper_compose.stepper.data.StepData
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.color.ProgressLineColors
-import com.behnawwm.stepper_compose.stepper.defaults.progressLine.configuration.ProgressLineConfiguration
-import com.behnawwm.stepper_compose.stepper.defaults.stepIndicator.configuration.StepIndicatorConfiguration
 
 fun DrawScope.drawProgressLine(
     stepData: StepData,
@@ -20,11 +20,12 @@ fun DrawScope.drawProgressLine(
     val lineStartX = (indicatorSize / 2)
 
     val lineEndYBeforeIndicator =
-        (size.height / 2) - (indicatorSize / 2) - progressLineConfiguration.distanceFromIndicator()
-            .toPx()
+        ((size.height / 2) - (indicatorSize / 2) - progressLineConfiguration.distanceFromIndicator()
+            .toPx())
+            .coerceAtLeast(0f)
     val lineStartYAfterIndicator =
-        (size.height / 2) + (indicatorSize / 2) + progressLineConfiguration.distanceFromIndicator()
-            .toPx()
+        ((size.height / 2) + (indicatorSize / 2) + progressLineConfiguration.distanceFromIndicator()
+            .toPx()).coerceAtLeast(0f)
 
     when (stepData.lineStatus) {
         LineStatus.End -> {
@@ -67,6 +68,8 @@ fun DrawScope.drawMiddleToBottom(
     color: Color,
     progressLineConfiguration: ProgressLineConfiguration,
 ) {
+    if (lineStartAfterIndicator >= size.height)
+        return
     drawLine(
         color = color,
         start = Offset(lineStartX, lineStartAfterIndicator),
@@ -87,6 +90,8 @@ fun DrawScope.drawTopToMiddle(
     progressLineConfiguration: ProgressLineConfiguration,
     color: Color,
 ) {
+    if (lineEndBeforeIndicator <= 0)
+        return
     drawLine(
         color = color,
         start = Offset(lineStartX, 0f),
